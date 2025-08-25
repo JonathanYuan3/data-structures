@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 
 /**
@@ -9,6 +10,28 @@ public class ListDemo
 {
     public static void main(String[] args)
     {
-        
+        /* The addlast method can be used to populate a list. */
+        LinkedList<String> staff = new LinkedList<>();
+        staff.addLast("Tony");
+        staff.addLast("Natasha");
+        staff.addLast("Peter");
+        staff.addLast("Steve");
+
+        System.out.println(staff);
+
+        //The list is currently: TNPS
+        /*
+         * The listIterator method creates a new list iterator
+         * that is positioned at the head of the
+         */
+
+        ListIterator<String> iterator = staff.listIterator(); // |TNPS
+
+        /* The next method advances the iterator OVER the next element in the list */
+        iterator.next(); // T|NPS
+
+        /* The next method also returns the element that the iterator passes over */
+        String avenger = iterator.next();
+        System.out.println(avenger); // Should print Natasha
     }
 }
