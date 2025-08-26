@@ -20,11 +20,7 @@ public class ListDemo
         System.out.println(staff);
 
         //The list is currently: TNPS
-        /*
-         * The listIterator method creates a new list iterator
-         * that is positioned at the head of the
-         */
-
+        /* The listIterator method creates a new list iterator that is positioned at the head of the list */
         ListIterator<String> iterator = staff.listIterator(); // |TNPS
 
         /* The next method advances the iterator OVER the next element in the list */
@@ -33,5 +29,58 @@ public class ListDemo
         /* The next method also returns the element that the iterator passes over */
         String avenger = iterator.next();
         System.out.println(avenger); // Should print Natasha
+
+        /* The add method inserts an element at the iterator position.
+         * The iterator is then positoned AFTER the element that was added. */
+        iterator.add("Clint"); // TNC|PS
+        iterator.add("Bruce"); // TNCB|PS
+        System.out.println(staff);
+
+        /* The remove method can ONLY be called after calling next or previous
+         * iterator.remove(); This line would cause an IllegalStateException
+         * The remove method removes the last element returned after calling next or previous */
+        iterator.next(); //TNCBP|S
+        iterator.remove(); //Peter is removed TNCB|S
+        System.out.println(staff);
+
+        /* The set method updates the element returned by the last call to next or previous. */
+        iterator.previous(); //TNC|BS
+        iterator.set("Thor"); //Bruce is replaced with Thor -> TNC|ThS
+        System.out.println(staff);
+
+        /* The hasNext method is used to determine if there is a next node after the iterator. The hasNext is often used in the condition of a while loop. */
+        iterator = staff.listIterator(); // |TNCThS
+        while (iterator.hasNext()) {
+            String n = iterator.next();
+            if (n.equals("Natasha")) { //TN|CThS
+                iterator.remove(); // T|CThS
+            }
+        } //TCThS|
+
+        /* Enhanced for loops work with linked lists */
+        for (String n : staff){
+            System.out.println(n + " ");
+        }
+        System.out.println();
+
+        /* ConcurrentModificationException
+         * CANNOT modify a linked list while using an iterator UNLESS you use the iterator to do the modification. */
+        iterator = staff.listIterator(); // |TCThS
+        while (iterator.hasNext()) {
+            String n = iterator.next();
+            if (n.equals("Tony")) { //T|CThS
+                // staff.remove("Tony"); ConcurrentModificationException
+                iterator.remove(); // |CThS
+            }
+        }
+
+        for (String n : staff) {
+            if(n.equals("Tony")) {
+                staff.add("T'Challa");
+            }
+        }
+
+        System.out.println(staff);
+        
     }
 }
