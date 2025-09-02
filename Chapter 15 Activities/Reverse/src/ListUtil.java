@@ -18,6 +18,7 @@ public class ListUtil
         while (iterator.hasNext()){ 
             temp.addFirst(iterator.next());
         }
+        //The method returns the linked list <strings">, so you need to move the objects in <temp> to <strings>.
         strings.clear();
         strings.addAll(temp);
     }
