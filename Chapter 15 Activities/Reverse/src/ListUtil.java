@@ -18,5 +18,7 @@ public class ListUtil
         while (iterator.hasNext()){ 
             temp.addFirst(iterator.next());
         }
+        strings.clear();
+        strings.addAll(temp);
     }
 }
