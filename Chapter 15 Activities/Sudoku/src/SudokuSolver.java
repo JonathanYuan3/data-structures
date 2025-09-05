@@ -37,9 +37,11 @@ public class SudokuSolver {
 
         // create the list of sets for each row (this.rows)
         // ...
+        LinkedList<Set<Integer>> rowList = new LinkedList<>();
 
         // create the list of sets for each col (this.cols)
         // ...
+        LinkedList<Set<Integer>> colList = new LinkedList<>();
 
         // create the list of sets for each square (this.squares)
         /* the squares are added to the list row-by-row:
@@ -48,9 +50,15 @@ public class SudokuSolver {
             6 7 8
          */
         // ...
+        LinkedList<Set<Integer>> squareList = new LinkedList<>();
 
         // create a hash set for [1..9] (this.nums)
         // ...
+        Set<Integer> numSet = new HashSet<>();
+        for (int i = 1; i <= N; i++) {
+            numSet.add(i);
+        }
+
 
         // visually inspect that all the sets are correct
         for (int row = 0; row < N; row++) {
@@ -98,6 +106,10 @@ public class SudokuSolver {
         possibleNums.addAll(this.nums);
         
         // ...
+        possibleNums.removeAll(this.rows.get(nextRow));
+        possibleNums.removeAll(this.cols.get(nextCol));
+        possibleNums.removeAll(this..get());
+
 
         // if there are no possible numbers, we cannot solve the board in its current state
         if (possibleNums.isEmpty()) {
