@@ -23,7 +23,7 @@ public class Sieve
         for (int i = 2; i * i <= n; i++) {
             if (terms.contains(i)) { //Check for a number that hasn't been removed (a prime number)
                 // Remove all multiples of i, excluding i itself
-                for (int j = 2 * i; j <= n; j += i) { //Removes all multiples of that number
+                for (int j = 2 * i; j <= n; j += i) { //Checks for every multiple of the number. Originally was going to use modulus (%) to figure out but realized this would be more efficient.
                     terms.remove(j);
                 }
             }
