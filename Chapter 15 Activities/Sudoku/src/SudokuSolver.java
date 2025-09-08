@@ -108,7 +108,7 @@ public class SudokuSolver {
         // ...
         possibleNums.removeAll(this.rows.get(nextRow));
         possibleNums.removeAll(this.cols.get(nextCol));
-        possibleNums.removeAll(this..get());
+        possibleNums.removeAll(this.squares.get(grid[nextRow][nextCol]));
 
 
         // if there are no possible numbers, we cannot solve the board in its current state
@@ -119,7 +119,9 @@ public class SudokuSolver {
         // try each possible number
         for (Integer possibleNum : possibleNums) {
             // update the grid and all three corresponding sets with possibleNum
-            // ...
+            this.rows.get(nextRow).add(possibleNum);
+            this.cols.get(nextCol).add(possibleNum);
+            this.squares.get(grid[nextRow][nextCol]).add(possibleNum);
 
             // recursively solve the board
             if (this.solve()) {
@@ -131,7 +133,13 @@ public class SudokuSolver {
                  element in the grid back to 0 and removing possibleNum from all three corresponding
                  sets.
                  */
-                // ...
+                this.rows = ;
+                this.cols = ;
+                this.grid[nextRow][nextCol] = ;
+
+                this.rows.remove(this.rows.get(nextRow));
+                this.cols.remove(this.cols.get(nextCol));
+                this.squares.remove(this.squares.get(grid[nextRow][nextCol]));
             }
         }
 
