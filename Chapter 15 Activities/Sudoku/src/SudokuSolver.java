@@ -37,11 +37,30 @@ public class SudokuSolver {
 
         // create the list of sets for each row (this.rows)
         // ...
-        LinkedList<Set<Integer>> rowList = new LinkedList<>();
+        this.rows = new ArrayList<Set<Integer>>();
+        for(int i = 0; i < N; i++) {
+            Set<Integer> rowSet = new HashSet<>();
+            for(int j = 0; j < N; j++) {
+                if(this.grid[i][j] != 0) {
+                    rowSet.add(this.grid[i][j]);
+                }
+            }
+            this.rows.add(rowSet);
+        }
 
         // create the list of sets for each col (this.cols)
         // ...
-        LinkedList<Set<Integer>> colList = new LinkedList<>();
+        this.cols = new ArrayList<Set<Integer>>();
+        for(int i = 0; i < N; i++) {
+            Set<Integer> colSet = new HashSet<>();
+            for(int j = 0; j < N; j++) {
+                if(this.grid[j][i] != 0) {
+                    colSet.add(this.grid[j][i]);
+                }
+            }
+            this.cols.add(colSet);
+        }
+        
 
         // create the list of sets for each square (this.squares)
         /* the squares are added to the list row-by-row:
@@ -51,6 +70,24 @@ public class SudokuSolver {
          */
         // ...
         LinkedList<Set<Integer>> squareList = new LinkedList<>();
+        this.squares = new ArrayList<>(squareList);
+        int startRow = 0;
+        int startCol = 0;
+        for(int square = 1; square < N; square++) {
+            Set<Integer> squareSet = new HashSet<>();
+            for(int row = startRow; row < startRow + M; row++) {
+                for(int col = startCol; col < startCol + M; col++) {
+                    if(this.grid[row][col] != 0) {
+                        squareSet.add(this.grid[row][col]);
+                    }
+                }
+            }
+            this.squares.add(squareSet);
+            startCol += M;
+            if(startCol >= N) {
+                startCol = 0;
+                startRow += M;
+            }
 
         // create a hash set for [1..9] (this.nums)
         // ...
@@ -67,10 +104,11 @@ public class SudokuSolver {
         for (int col = 0; col < N; col++) {
             System.out.println("col " + col + ": " + this.cols.get(col));
         }
-        for (int square = 0; square < N; square++) {
+        for (int squares = 0; square < N; square++) {
             System.out.println("square " + square + ": " + this.squares.get(square));
         }
         System.out.println(this.nums);
+        }
     }
 
     public boolean solve() {
@@ -102,13 +140,12 @@ public class SudokuSolver {
             Properly indexing the squares list of sets is tricky. Verify that your
             algorithm is correct.
          */
-        Set<Integer> possibleNums = new HashSet<Integer>();
-        possibleNums.addAll(this.nums);
-        
-        // ...
+        Set<Integer> possibleNums = new HashSet<Integer>(this.nums);
         possibleNums.removeAll(this.rows.get(nextRow));
         possibleNums.removeAll(this.cols.get(nextCol));
-        possibleNums.removeAll(this.squares.get(grid[nextRow][nextCol]));
+        possibleNums.removeAll(this.squares.get(nextRow / M * M + nextCol / M));
+
+        System.out.println("row: " + nextRow + ", col: " + nextCol + ", possible: " + possibleNums);
 
 
         // if there are no possible numbers, we cannot solve the board in its current state
@@ -133,13 +170,10 @@ public class SudokuSolver {
                  element in the grid back to 0 and removing possibleNum from all three corresponding
                  sets.
                  */
-                this.rows = ;
-                this.cols = ;
-                this.grid[nextRow][nextCol] = ;
-
-                this.rows.remove(this.rows.get(nextRow));
-                this.cols.remove(this.cols.get(nextCol));
-                this.squares.remove(this.squares.get(grid[nextRow][nextCol]));
+                this.grid[nextRow][nextCol] = 0;
+                this.rows.get(nextRow).remove(possibleNum);
+                this.cols.get(nextCol).remove(possibleNum);
+                this.squares.get(nextRow / M * M + nextCol / M).remove(possibleNum);
             }
         }
 
