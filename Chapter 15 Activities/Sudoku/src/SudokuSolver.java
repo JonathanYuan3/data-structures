@@ -170,6 +170,7 @@ public class SudokuSolver {
                  element in the grid back to 0 and removing possibleNum from all three corresponding
                  sets.
                  */
+                //Using "this.grid[nextRow][nextCol] = 0;" causes rows and columns to stay as 0 and never update. Why does this new method work? Ask Dr. Miller/discuss with Neel
                 this.grid[nextRow][nextCol] = possibleNum;
                 this.rows.get(nextRow).remove(possibleNum);
                 this.cols.get(nextCol).remove(possibleNum);
