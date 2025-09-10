@@ -73,7 +73,7 @@ public class SudokuSolver {
         this.squares = new ArrayList<>(squareList);
         int startRow = 0;
         int startCol = 0;
-        for(int square = 1; square < N; square++) {
+        for(int square = 0; square < N; square++) {
             Set<Integer> squareSet = new HashSet<>();
             for(int row = startRow; row < startRow + M; row++) {
                 for(int col = startCol; col < startCol + M; col++) {
@@ -88,12 +88,15 @@ public class SudokuSolver {
                 startCol = 0;
                 startRow += M;
             }
+        }
 
         // create a hash set for [1..9] (this.nums)
         // ...
-        Set<Integer> numSet = new HashSet<>();
+        this.nums = new HashSet<>();
+        //Set<Integer> numSet = new HashSet<>();
         for (int i = 1; i <= N; i++) {
-            numSet.add(i);
+            //numSet.add(i);
+        	this.nums.add(i);
         }
 
 
@@ -104,12 +107,11 @@ public class SudokuSolver {
         for (int col = 0; col < N; col++) {
             System.out.println("col " + col + ": " + this.cols.get(col));
         }
-        for (int squares = 0; square < N; square++) {
-            System.out.println("square " + square + ": " + this.squares.get(square));
+        for (int squares = 0; squares < N; squares++) {
+            System.out.println("square " + squares + ": " + this.squares.get(squares));
         }
         System.out.println(this.nums);
         }
-    }
 
     public boolean solve() {
         // find an empty location, if any
