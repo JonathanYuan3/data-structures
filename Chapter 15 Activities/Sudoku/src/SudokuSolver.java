@@ -93,9 +93,7 @@ public class SudokuSolver {
         // create a hash set for [1..9] (this.nums)
         // ...
         this.nums = new HashSet<>();
-        //Set<Integer> numSet = new HashSet<>();
         for (int i = 1; i <= N; i++) {
-            //numSet.add(i);
         	this.nums.add(i);
         }
 
@@ -172,7 +170,7 @@ public class SudokuSolver {
                  element in the grid back to 0 and removing possibleNum from all three corresponding
                  sets.
                  */
-                this.grid[nextRow][nextCol] = 0;
+                this.grid[nextRow][nextCol] = possibleNum;
                 this.rows.get(nextRow).remove(possibleNum);
                 this.cols.get(nextCol).remove(possibleNum);
                 this.squares.get(nextRow / M * M + nextCol / M).remove(possibleNum);
