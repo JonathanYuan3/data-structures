@@ -156,6 +156,8 @@ public class SudokuSolver {
         // try each possible number
         for (Integer possibleNum : possibleNums) {
             // update the grid and all three corresponding sets with possibleNum
+            // this.grid[nextRow][nextCol] = possibleNum;
+            
             this.rows.get(nextRow).add(possibleNum);
             this.cols.get(nextCol).add(possibleNum);
             this.squares.get(grid[nextRow][nextCol]).add(possibleNum);
@@ -171,7 +173,8 @@ public class SudokuSolver {
                  sets.
                  */
                 //Using "this.grid[nextRow][nextCol] = 0;" causes rows and columns to stay as 0 and never update. Why does this new method work? Ask Dr. Miller/discuss with Neel
-                this.grid[nextRow][nextCol] = possibleNum;
+                //Answer: Forgot to update the grid at the start of the for loop, so we are "undoing" a move that never happened
+                this.grid[nextRow][nextCol] = 1;
                 this.rows.get(nextRow).remove(possibleNum);
                 this.cols.get(nextCol).remove(possibleNum);
                 this.squares.get(nextRow / M * M + nextCol / M).remove(possibleNum);
@@ -196,7 +199,7 @@ public class SudokuSolver {
     }
 
     public static void main(String[] args) {
-        String fileName = "src/puzzle1.txt";
+        String fileName = "Chapter 15 Activities/Sudoku/src/puzzle1.txt";
 
         SudokuSolver solver = new SudokuSolver(fileName);
         System.out.println(solver);
