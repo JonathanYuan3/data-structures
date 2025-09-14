@@ -1,16 +1,18 @@
 import java.util.*;
 import java.io.*;
+import java.util.Map;
+import java.util.TreeMap;
 /**
- * Read all words from a file and add them to a map
- * whose keys are the first letters of the words and
- * whose values are sets of words that start with
- * that same letter.
- * Then print out the word sets in alphabetical order.
- * Use the Java 8 merge() feature.
-*/
+ * Read all words from a file and add them to a
+ * map whose keys are word lengths and whose values
+ * are comma-separated strings of words of the same length.
+ * Then print out those strings, in increasing order by
+ * the length of their entries.
+ * Modify Worked Example 15.1.
+ */
 public class FirstLetterMap
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws FileNotFoundException
     {
         String filename = "src/test1.txt";
 
@@ -18,7 +20,7 @@ public class FirstLetterMap
         {
 
             // Create your map here
-            ...
+            Map <Character, String> firstletters = new TreeMap();
 
             while (in.hasNext())
             {
@@ -26,14 +28,24 @@ public class FirstLetterMap
                 Character c = word.charAt(0);
 
                 // Update the map here
-                // Use the Java 8 merge method
-                . . .
+                // Modify Worked Example 15.1
+                if (firstletters.get(c) == null) {
+                    firstletters.put(c, word);
+                }
+                else {
+                    firstletters.put(c, word + ", " + firstletters.get(c));
+                }
+
+                
+
 
             }
 
             // Print the map here in this form
+            for(Character key : firstletters.keySet()){
+                System.out.println(key + ": [" + firstletters.get(key) + "]");
+            }
             // a: [a, able, aardvark]
-            . . .
         } catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
