@@ -14,7 +14,7 @@ public class StringLengthMap
 {
     public static void main(String[] args) throws FileNotFoundException
     {
-        String filename = "Chapter 15 Activities/StringLengthMap/src/test1.txt";
+        String filename = "src/test1.txt"; //Chapter 15 Activities/StringLengthMap/src/
 
         try (Scanner in = new Scanner(new File(filename)))
         {
@@ -28,6 +28,7 @@ public class StringLengthMap
                 Integer len = word.length();
 
                 // Update the map here
+                // Modify Worked Example 15.1
                 if (lengths.get(len) == null) {
                     lengths.put(len, word);
                 }
@@ -35,10 +36,6 @@ public class StringLengthMap
                     lengths.put(len, word + ", " + lengths.get(len));
                     //System.out.println(lengths); for debugging
                 }
-                // Modify Worked Example 15.1
-
-                
-
 
             }
 
