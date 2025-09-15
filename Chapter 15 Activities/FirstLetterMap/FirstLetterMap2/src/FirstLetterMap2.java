@@ -14,7 +14,7 @@ public class FirstLetterMap2
 {
     public static void main(String[] args) throws FileNotFoundException
     {
-        String filename = "src/test1.txt";
+        String filename = "Chapter 15 Activities/StringLengthMap/src/test1.txt";
 
         try (Scanner in = new Scanner(new File(filename)))
         {
@@ -30,7 +30,6 @@ public class FirstLetterMap2
                 // Update the map here
                 // Use the Java 8 merge() method
                 firstletters.merge(c, word, (oldValue, notPresentValue) -> oldValue + ", " + notPresentValue);
-                }
             }
 
             // Print the map here in this form
@@ -38,7 +37,7 @@ public class FirstLetterMap2
 	            System.out.println(key + ": [" + firstletters.get(key) + "]");
 	        }
             // a: [a, able, aardvark]
-        } catch (FileNotFoundException e)
+        }   catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
         }
