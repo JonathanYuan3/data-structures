@@ -45,11 +45,16 @@ public class Driveway
     */
     public void remove(int licensePlate)
     {
+    	int carsmoved = 0;
         // Complete this method
-        if (driveway.peek() == licensePlate) {
-          
+        while(driveway.peek() != licensePlate) {
+        	street.push(driveway.pop());
+        	carsmoved++;
         }
-        
+        driveway.pop();
+        for(int i = 0; i < carsmoved; i++) {
+        	driveway.push(street.pop());
+        }
     }
 
     /**
