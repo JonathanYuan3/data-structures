@@ -47,7 +47,7 @@ public class HTMLChecker
                 }
             }
 
-            if (!stack.isEmpty()) {
+            if (stack.size() > 0) {
                 working = false;
             }
 
