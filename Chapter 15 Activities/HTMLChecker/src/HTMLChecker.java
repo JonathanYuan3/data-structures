@@ -21,14 +21,45 @@ public class HTMLChecker
 
         try (Scanner in = new Scanner(new File(filename)))
         {
-            // Your code goes here
-            . . .
+        	// Your code goes here
+            Stack<String> stack = new Stack<>();
+            boolean working = true;
 
+            while (in.hasNext()) {
+                String tag = in.next();
 
+                if (tag.startsWith("</")) {
+                    if (stack.isEmpty()) {
+                        working = false;
+                        break;
+                    }
+
+                    String tag1 = stack.pop();
+                    String openTag = tag1.substring(1, tag1.length() - 1);
+                    String closeTag = tag.substring(2, tag.length() - 1);
+
+                    if (!openTag.equals(closeTag)) {
+                        working = false;
+                        break;
+                    }
+                } else {
+                    stack.push(tag);
+                }
+            }
+
+            if (!stack.isEmpty()) {
+                working = false;
+            }
+
+            if (working) {
+                System.out.println("Tags are properly nested.");
+            } else {
+                System.out.println("Tags are NOT properly nested.");
+            }
+            
         } catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
         }
-
     }
 }
