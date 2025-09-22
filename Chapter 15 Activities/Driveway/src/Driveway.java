@@ -35,7 +35,6 @@ public class Driveway
     {
         // Complete this method
         driveway.push(licensePlate);
-        System.out.println(driveway.peek() + " moves to the driveway");
     }
 
     /**
