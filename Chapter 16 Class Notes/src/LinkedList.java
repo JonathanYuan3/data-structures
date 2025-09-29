@@ -216,6 +216,31 @@ public class LinkedList
             position.data = element;
             // We don't have to reset isAfterNext because the structure of the list has not changed
         }
+        
+        /*
+         * Add a method size to our implementation of the LinkedList class that computes the number of elements in the list by following links and counting the elements until the end of the list is reached.
+         * Implement the method in the LinkedList class and test your implementation using the SizeTester class.
+         */
+        public int size() {
+            int size = 0;
+            while(hasNext()) {
+                size++;
+            }
+            return size;
+        }
+
+        /*
+         * Add a method boolean contains(Object obj) that checks whether our LinkedList implementation contains a given object.
+         * Implement this method by directly traversing the links, not by using an iterator. Use the equals method to determine whether obj equals node.data for a given node.
+         */
+        public boolean contains(Object obj) {
+        for(int i = 0; i < size(); i++) {
+            if(next().equals(obj)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 

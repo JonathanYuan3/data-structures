@@ -39,10 +39,15 @@ public class LinkedList
         @param obj The object to be checked for.
         @return If the object exists in the list.
     */
-    public boolean contains(Object obj)
-    {
-        // ...
-    }
+    public boolean contains(Object obj) {
+            Node temp = new Node();
+                for(int i = 0; i < size(); i++) {
+                    if(temp.data.equals(obj)) {
+                        return true;
+                    }
+                }
+                return false;
+        }
 
     /**
         Returns the first element in the linked list.
