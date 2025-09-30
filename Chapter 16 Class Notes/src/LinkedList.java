@@ -234,16 +234,17 @@ public class LinkedList
          * Implement this method by directly traversing the links, not by using an iterator. Use the equals method to determine whether obj equals node.data for a given node.
          */
         public boolean contains(Object obj) {
-        for(int i = 0; i < size(); i++) {
-            if(next().equals(obj)) {
-                return true;
+            for(int i = 0; i < size(); i++) {
+                if(next().equals(obj)) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
-    }
 
 
 
 
     }//LinkedListIterator
 }//LinkedList
+
