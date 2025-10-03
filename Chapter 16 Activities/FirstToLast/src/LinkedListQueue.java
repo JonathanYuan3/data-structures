@@ -23,12 +23,11 @@ public class LinkedListQueue
     */
     public void firstToLast()
     {
-        Node temp = head; // save head
-        while(head != temp) { 
-            add(remove()); // move everything forward
-        }
-        remove(); // remove old head
-        add(temp.data); // add old head to tail
+       Node temp = head;
+       head = head.next;
+       temp.next = null; // disconnects the temp node from the original second node which might cause problems
+       tail.next = temp; // points the last node to the old head node
+       tail = temp;
     }
 
     /**
