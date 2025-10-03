@@ -22,13 +22,14 @@ public class LinkedListQueue
     */
     public void lastToFirst()
     {
-        Node temp = tail;
-        while (true) {
-            add(remove());
-            if (head == temp) {
-                break;
-            }
-        }
+       Node temp = head;
+       while(temp.next != tail) {
+    	   temp = temp.next;
+       }
+       temp.next = null; // detach tail node from the list
+       tail.next = head; // link tail node to head node
+       head = tail;
+       tail = temp; // update the node that tail points to
     }
 
     /**
