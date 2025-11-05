@@ -101,5 +101,22 @@ public class BinaryTree
         BinaryTree result = new BinaryTree();
         result.root = root.right;
         return result;
+    }    
+
+    public int countNodesWithOneChild()
+    {
+        return countNodesWithOneChild(root);
+    }
+
+    public int countNodesWithOneChild(Node node)
+    {
+        int count = 0;
+        if((node.left != null && node.right == null) || (node.left == null && node.right != null))
+            count++;
+        if(node.left != null)
+            return count += countNodesWithOneChild(node.left);
+        if(node.right != null)
+            return count += countNodesWithOneChild(node.right);
+        return count;
     }
 }
