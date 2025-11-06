@@ -32,22 +32,20 @@ public class BinarySearchTree {
     }
 
     /**
-        Tries to find an object in the tree.
-        @param obj the object to find
-        @return true if the object is contained in the tree
-    */
-    public boolean find(Comparable obj)
-    {
+     * Tries to find an object in the tree.
+     * 
+     * @param obj the object to find
+     * @return true if the object is contained in the tree
+     */
+    public boolean find(Comparable obj) {
         Node current = this.root;
-        while(current != null) {
+        while (current != null) {
             int diff = obj.compareTo(current.data);
-            if(diff == 0) {
+            if (diff == 0) {
                 return true;
-            }
-            else if (diff < 0) {
+            } else if (diff < 0) {
                 current = current.left;
-            }
-            else if (diff > 0) {
+            } else if (diff > 0) {
                 current = current.right;
             }
         }
@@ -63,22 +61,41 @@ public class BinarySearchTree {
     public void remove(Comparable obj) {
         Node toBeRemoved = this.root;
         boolean found = false;
+        Node parent = null;
 
-        while(!found && toBeRemoved != null) {
+        while (!found && toBeRemoved != null) {
             int diff = obj.compareTo(toBeRemoved.data);
-            if(diff == 0) {
+            if (diff == 0) {
                 found = true;
-            }
-            else if (diff < 0) {
+            } else if (diff < 0) {
+                parent = toBeRemoved;
                 toBeRemoved = toBeRemoved.left;
-            }
-            else if (diff > 0) {
+            } else if (diff > 0) {
+                parent = toBeRemoved;
                 toBeRemoved = toBeRemoved.right;
             }
         }
 
-        if(!found) {
+        if (!found) {
             return;
+        }
+
+        // Case 1 and Case 2 (At least one child is null)
+        if (toBeRemoved.left == null || toBeRemoved.right == null) {
+            Node newChild;
+            if (toBeRemoved.left == null) {
+                newChild = toBeRemoved.right;
+            } else {
+                newChild = toBeRemoved.left;
+            }
+
+            if (parent == null) { // Remove the root if the parent is null
+                this.root = newChild;
+            } else if (parent.left == toBeRemoved) {
+                parent.left = newChild;
+            } else {
+                parent.right = newChild;
+            }
         }
     }
 
@@ -86,7 +103,9 @@ public class BinarySearchTree {
      * Prints the contents of the tree in sorted order.
      */
     public void print() {
-
+        // Print the tree using order traversal
+        print(this.root);
+        System.out.println();
     }
 
     /**
@@ -95,7 +114,13 @@ public class BinarySearchTree {
      * @param parent the root of the subtree to print
      */
     private static void print(Node parent) {
-
+        if(parent == null) {
+            return;
+        }
+        print (parent.left);
+        System.out.print(parent.data + " ");
+        print (parent.right);
+        
     }
 
     /**
