@@ -22,7 +22,7 @@ public class DepthFirstTester
         t5.addSubtree(t7);
 
         // Use a lambda (Section 10.4) for the visitor
-        Visitor visitor = (data) -> {
+        Tree.Visitor visitor = (data) -> {
             if (data == null) return false;
             System.out.print(data + " ");
             return true;

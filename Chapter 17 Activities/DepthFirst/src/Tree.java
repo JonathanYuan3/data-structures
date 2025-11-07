@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Stack;
 import java.util.ArrayList;
 
 /**
@@ -64,5 +65,55 @@ public class Tree
         else { return root.size(); }
     }
 
-    // Additional methods will be added in later sections.
+    /*
+     * A visitor method is called for each visited node during a tree traversal.
+     */
+    public interface Visitor {
+        /*
+         * The visit method is called for each visited node
+         * @param data: The data of the node being visited
+         */
+        boolean visit(Object data);
+    }
+
+    public void depthFirst(Visitor v)
+    {
+        if (root == null) {
+            return;
+        }
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        boolean cont = true;
+        while(cont && stack.size() > 0) {
+            Node n = stack.pop();
+            cont = v.visit(n.data);
+            if(cont == true) {
+                for(Node child : n.children) {
+                    stack.push(child);
+                }
+            }
+        }
+    }
+
+    /*
+     * Traverse the tree in postorder.
+     * @param v: The visitor to be invoked on each node.
+     */
+    public void postorder(Visitor v) {
+        Tree.postorder(this.root, v);
+    }
+    
+    /*
+     * Traverse the tree in postorder.
+     * @param v: The visitor to be invoked on each node.
+     */
+    private static void postorder(Node n, Visitor v) {
+        if (n == null) {
+            return;
+        }
+        v.visit(n.data);
+        for (Node child : n.children) {
+            Tree.postorder(child, v);
+        }
+    }
 }
